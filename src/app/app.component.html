@@ -1,39 +1,8 @@
-<div class="alert alert-primary" role="alert">
-  A simple primary alert—check it out!
-</div>
-<!--  -->
-<div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Dropdown button
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href="#">Action</a>
-    <a class="dropdown-item" href="#">Another action</a>
-    <a class="dropdown-item" href="#">Something else here</a>
-  </div>
-</div>
-
-<div class="btn" [class]="btnCls">btnCls</div>
-<div class="btn" [class]="btnCls2">btnCls2</div>
-<div class="btn" [class]="btnCls3">btnCls3</div>
-<!-- 也可以用内置指令ngClass -->
-<div class="btn" [ngClass]="btnCls">btnCls</div>
-<div class="btn" [ngClass]="btnCls2">btnCls2</div>
-<div class="btn" [ngClass]="btnCls3">btnCls3</div>
-
-
-<p [style]="style1">style1</p>
-<p [style]="style2">style2</p>
-<p [style]="style3">style3</p>
-<!-- 也可以用内置指令ngStyle, 但不推荐，以后可能会弃用 -->
-<!--  <p [ngStyle]="style1">style1</p>-->
-<!--  <p [ngStyle]="style2">style2</p>-->
-
-<!-- ngStyle只接收对象 -->
-<p [ngStyle]="style3">style3</p>
-
-
-<button type="button" class="btn btn-primary" (click)="onClick($event)">Primary</button>
-<button type="button" class="btn btn-primary" (click)="$event.preventDefault();">Primary</button>
-<button type="button" class="btn btn-primary" (click)="num += 1;">Primary</button>
-<button type="button" class="btn btn-primary" (click)="$event.preventDefault();onClick()">Primary</button>
+<button class="btn btn-primary btn-small" (click)="showDialog()">显示模态框</button>
+<app-dialog 
+  [title]="dialogTile" 
+  [show]="dialogShow"
+  confirmText="OK" 
+  (closed)="onDialogClosed()"
+  (confirm)="onDialogConfirm()"
+></app-dialog>
