@@ -34,3 +34,6 @@
 
 
 <button type="button" class="btn btn-primary" (click)="onClick($event)">Primary</button>
+<button type="button" class="btn btn-primary" (click)="$event.preventDefault();">Primary</button>
+<button type="button" class="btn btn-primary" (click)="num += 1;">Primary</button>
+<button type="button" class="btn btn-primary" (click)="$event.preventDefault();onClick()">Primary</button>

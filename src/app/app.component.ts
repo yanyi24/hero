@@ -13,6 +13,7 @@ export class AppComponent {
     btn: true,
     'btn-info': true
   };
+  num = 1;
   style1 = 'width: 200px;height: 50px;text-align: center;border: 1px solid;';
   style2 = ['width', '200px', 'height', '50px', 'text-align', 'center', 'border', '1px solid']; // 有问题
   style3 = {
