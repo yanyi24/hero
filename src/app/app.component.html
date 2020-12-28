@@ -1,3 +1,10 @@
 <!-- <app-ng-for></app-ng-for> -->
-<app-directive></app-directive>
-<p appHighlight>Highlight me!</p>
+<!-- <app-directive></app-directive> -->
+<!-- <p ngNonBindable appHighlight="blue">Highlight me!</p>
+<p ngNonBindable>这样是不会被求值: {{ 1 + 1 }}</p> -->
+
+<p>这正常显示</p>
+<ng-template>
+  <p>这个不能显示</p>
+</ng-template>
+<p>这也正常显示</p>
