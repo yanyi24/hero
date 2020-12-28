@@ -9,6 +9,8 @@ import { NgIfComponent } from './components/ng-if/ng-if.component';
 import { NgSwitchComponent } from './components/ng-switch/ng-switch.component';
 import { FormsModule } from '@angular/forms';
 import { NgForComponent } from './components/ng-for/ng-for.component';
+import { HighlightDirective } from './directives/highlight.directive';
+import { DirectiveComponent } from './components/directive/directive.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { NgForComponent } from './components/ng-for/ng-for.component';
     DialogComponent,
     NgIfComponent,
     NgSwitchComponent,
-    NgForComponent
+    NgForComponent,
+    HighlightDirective,
+    DirectiveComponent
   ],
   imports: [
     BrowserModule,

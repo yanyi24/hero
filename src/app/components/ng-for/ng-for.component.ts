@@ -11,7 +11,7 @@ interface Hero {
 }
 
 @Component({
-  selector: 'app-ng-for',
+  selector: '[app-ng-for]',
   template: `
     <button class="btn btn-primary" (click)="reset()">重置</button>
     <ul>
