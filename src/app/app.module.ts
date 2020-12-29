@@ -10,7 +10,7 @@ import { NgSwitchComponent } from './components/ng-switch/ng-switch.component';
 import { FormsModule } from '@angular/forms';
 import { NgForComponent } from './components/ng-for/ng-for.component';
 import { HighlightDirective } from './directives/highlight.directive';
-import { DirectiveComponent } from './components/directive/directive.component';
+import { UnlessDirective } from './directives/unless.directive';
 
 @NgModule({
   declarations: [
@@ -20,7 +20,7 @@ import { DirectiveComponent } from './components/directive/directive.component';
     NgSwitchComponent,
     NgForComponent,
     HighlightDirective,
-    DirectiveComponent
+    UnlessDirective
   ],
   imports: [
     BrowserModule,

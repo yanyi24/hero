@@ -3,8 +3,9 @@
 <!-- <p ngNonBindable appHighlight="blue">Highlight me!</p>
 <p ngNonBindable>这样是不会被求值: {{ 1 + 1 }}</p> -->
 
-<p>这正常显示</p>
-<ng-template>
-  <p>这个不能显示</p>
-</ng-template>
-<p>这也正常显示</p>
+<div>
+  <h3>unless 结构型指令</h3>
+  <button class="btn btn-primary" (click)="showUnless = !showUnless">切换showUnless--{{showUnless}}</button>
+  <p *appUnless="showUnless; let un">测试uless指令 --- {{un}}</p>
+</div>
+
