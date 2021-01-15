@@ -3,9 +3,13 @@
 <!-- <p ngNonBindable appHighlight="blue">Highlight me!</p>
 <p ngNonBindable>这样是不会被求值: {{ 1 + 1 }}</p> -->
 
-<div>
+<!-- <div>
   <h3>unless 结构型指令</h3>
   <button class="btn btn-primary" (click)="showUnless = !showUnless">切换showUnless--{{showUnless}}</button>
   <p *appUnless="showUnless; let un">测试uless指令 --- {{un}}</p>
 </div>
-
+ -->
+<app-tpl-outlet [render]="outTpl"></app-tpl-outlet>
+<ng-template #outTpl let-key let-val="value">
+  <p>外部传入模板内容 --- 组件内部传过来的变量默认值:{{key}},value:{{val}}</p>
+</ng-template>

@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { NgForComponent } from './components/ng-for/ng-for.component';
 import { HighlightDirective } from './directives/highlight.directive';
 import { UnlessDirective } from './directives/unless.directive';
+import { TplOutletComponent } from './components/tpl-outlet/tpl-outlet.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { UnlessDirective } from './directives/unless.directive';
     NgSwitchComponent,
     NgForComponent,
     HighlightDirective,
-    UnlessDirective
+    UnlessDirective,
+    TplOutletComponent
   ],
   imports: [
     BrowserModule,

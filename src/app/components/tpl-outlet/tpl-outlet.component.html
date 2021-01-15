@@ -1,0 +1,10 @@
+<div class="outlet">
+  <h2>NgTemplateOutlet</h2>
+  <div class="content">
+    <ng-container *ngTemplateOutlet="render || defaultTpl; context: ctx"></ng-container>
+    <ng-container [ngTemplateOutlet]="render || defaultTpl"  [ngTemplateOutletContext]="ctx"></ng-container>
+  </div>
+</div>
+<ng-template #defaultTpl>
+  <p>组件默认内容</p>
+</ng-template>
