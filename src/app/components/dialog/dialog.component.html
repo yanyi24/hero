@@ -8,7 +8,11 @@
         </button>
       </div>
       <div class="modal-body">
-        ...
+        <ng-content select="[attr]"></ng-content>
+        <ng-content select="article"></ng-content>
+        <ng-content select=".fromClass"></ng-content>
+        <ng-content select="#fromId"></ng-content>
+        <ng-content></ng-content>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="onClose()">{{cancelText}}</button>
