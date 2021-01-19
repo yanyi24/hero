@@ -13,6 +13,7 @@ import { HighlightDirective } from './directives/highlight.directive';
 import { UnlessDirective } from './directives/unless.directive';
 import { TplOutletComponent } from './components/tpl-outlet/tpl-outlet.component';
 import { ViewChildComponent } from './components/view-child/view-child.component';
+import { PanelComponent } from './components/view-child/panel/panel.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ViewChildComponent } from './components/view-child/view-child.component
     HighlightDirective,
     UnlessDirective,
     TplOutletComponent,
-    ViewChildComponent
+    ViewChildComponent,
+    PanelComponent
   ],
   imports: [
     BrowserModule,
