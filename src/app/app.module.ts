@@ -12,6 +12,7 @@ import { NgForComponent } from './components/ng-for/ng-for.component';
 import { HighlightDirective } from './directives/highlight.directive';
 import { UnlessDirective } from './directives/unless.directive';
 import { TplOutletComponent } from './components/tpl-outlet/tpl-outlet.component';
+import { ViewChildComponent } from './components/view-child/view-child.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { TplOutletComponent } from './components/tpl-outlet/tpl-outlet.component
     NgForComponent,
     HighlightDirective,
     UnlessDirective,
-    TplOutletComponent
+    TplOutletComponent,
+    ViewChildComponent
   ],
   imports: [
     BrowserModule,
