@@ -14,6 +14,8 @@ import { UnlessDirective } from './directives/unless.directive';
 import { TplOutletComponent } from './components/tpl-outlet/tpl-outlet.component';
 import { ViewChildComponent } from './components/view-child/view-child.component';
 import { PanelComponent } from './components/view-child/panel/panel.component';
+import { ContentChildComponent } from './components/content-child/content-child.component';
+import { ContentChildPanelComponent } from './components/content-child/content-child-panel/content-child-panel.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { PanelComponent } from './components/view-child/panel/panel.component';
     UnlessDirective,
     TplOutletComponent,
     ViewChildComponent,
-    PanelComponent
+    PanelComponent,
+    ContentChildComponent,
+    ContentChildPanelComponent
   ],
   imports: [
     BrowserModule,

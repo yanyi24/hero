@@ -22,4 +22,14 @@
   <p id="fromId">这是从父组件传入的通过<b>id</b>选中的内容</p>
 </app-dialog> -->
 
-<app-view-child></app-view-child>
+<!-- <app-view-child></app-view-child> -->
+
+<app-content-child>
+  <!-- <span class="head">传入的头部</span>
+  <div #other>其他内容</div> -->
+  <app-content-child-panel></app-content-child-panel>
+  <app-content-child-panel></app-content-child-panel>
+  <div class="foot">
+    <app-content-child-panel></app-content-child-panel>
+  </div>
+</app-content-child>
