@@ -253,7 +253,7 @@ export class NgForComponent implements OnInit {
 
 页面效果如下：
 
-![trackBy](/Users/macair/Desktop/work-space/angular/hero/src/notes/trackBy.gif)
+![trackBy](./images/trackBy.gif)
 
 当我们点击重置的时候，可以看出，第一条跟第三条数据，页面是没有更新的，从而达到节约开销的作用。
 
