@@ -16,6 +16,8 @@ import { ViewChildComponent } from './components/view-child/view-child.component
 import { PanelComponent } from './components/view-child/panel/panel.component';
 import { ContentChildComponent } from './components/content-child/content-child.component';
 import { ContentChildPanelComponent } from './components/content-child/content-child-panel/content-child-panel.component';
+import { PipeComponent } from './components/pipe/pipe.component';
+import { ExponentialStrengthPipe } from './pipe/exponential-strength.pipe';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { ContentChildPanelComponent } from './components/content-child/content-c
     ViewChildComponent,
     PanelComponent,
     ContentChildComponent,
-    ContentChildPanelComponent
+    ContentChildPanelComponent,
+    PipeComponent,
+    ExponentialStrengthPipe
   ],
   imports: [
     BrowserModule,

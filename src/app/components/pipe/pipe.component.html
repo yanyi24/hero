@@ -1,0 +1,9 @@
+<div class="pipe">
+  <div *ngFor="let item of obj | keyvalue">
+    {{item.key}}: {{item.value}}
+  </div>
+  <div *ngFor="let item of map | keyvalue">
+    {{item.key}}: {{item.value}}
+  </div>
+  <p>{{5 | exponentialStrength: 3}}</p>
+</div>
