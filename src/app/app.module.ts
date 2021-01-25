@@ -18,6 +18,7 @@ import { ContentChildComponent } from './components/content-child/content-child.
 import { ContentChildPanelComponent } from './components/content-child/content-child-panel/content-child-panel.component';
 import { PipeComponent } from './components/pipe/pipe.component';
 import { ExponentialStrengthPipe } from './pipe/exponential-strength.pipe';
+import { NumberGtZeroPipe } from './pipe/number-gt-zero.pipe';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { ExponentialStrengthPipe } from './pipe/exponential-strength.pipe';
     ContentChildComponent,
     ContentChildPanelComponent,
     PipeComponent,
-    ExponentialStrengthPipe
+    ExponentialStrengthPipe,
+    NumberGtZeroPipe
   ],
   imports: [
     BrowserModule,

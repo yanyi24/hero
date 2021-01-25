@@ -6,4 +6,6 @@
     {{item.key}}: {{item.value}}
   </div>
   <p>{{5 | exponentialStrength: 3}}</p>
+  <button class="btn btn-primary" (click)="addNumber()">添加数字</button><br>
+  <span *ngFor="let n of (numArr | numberGtZero)">{{n}}</span>
 </div>
