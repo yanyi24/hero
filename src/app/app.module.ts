@@ -19,6 +19,7 @@ import { ContentChildPanelComponent } from './components/content-child/content-c
 import { PipeComponent } from './components/pipe/pipe.component';
 import { ExponentialStrengthPipe } from './pipe/exponential-strength.pipe';
 import { NumberGtZeroPipe } from './pipe/number-gt-zero.pipe';
+import { LifeCycleComponent } from './components/life-cycle/life-cycle.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { NumberGtZeroPipe } from './pipe/number-gt-zero.pipe';
     ContentChildPanelComponent,
     PipeComponent,
     ExponentialStrengthPipe,
-    NumberGtZeroPipe
+    NumberGtZeroPipe,
+    LifeCycleComponent
   ],
   imports: [
     BrowserModule,

@@ -34,4 +34,6 @@
   </div>
 </app-content-child> -->
 
-<app-pipe></app-pipe>
+<!-- <app-pipe></app-pipe> -->
+<button class="btn btn-primary" (click)="show = !show">toggle life-cycle</button>
+<app-life-cycle title="This is a title" *ngIf="show"></app-life-cycle>
