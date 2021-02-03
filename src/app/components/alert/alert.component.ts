@@ -1,11 +1,10 @@
-import {ChangeDetectionStrategy, Component, OnInit, Output} from '@angular/core';
-import {EventEmitter} from 'events';
+import {ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output} from '@angular/core';
 // 定义主题参数
 type AlertTheme = 'primary' | 'danger' | 'warning' | 'secondary' | 'success' | 'info' | 'dark' | 'light';
 // 限定参数
 export interface AlertOption {
   content: string;
-  theme?: string;
+  theme?: AlertTheme;
 }
 @Component({
   selector: 'app-alert',
@@ -31,7 +30,7 @@ export class AlertComponent implements OnInit {
     theme: 'primary',
   }
   // 注册关闭的输出事件
-  @Output() readonly closed = new EventEmitter<void>();
+  @Output() readonly closed = new EventEmitter();
   constructor() { }
 
   ngOnInit(): void {
