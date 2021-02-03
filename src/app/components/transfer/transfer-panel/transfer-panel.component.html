@@ -1,0 +1,16 @@
+<div class="transfer-panel border rounded">
+  <div class="head pl-3">
+    <p>
+      <span *ngIf="selecteds.length">{{selecteds.length}} /</span> {{ list.length }} 项
+    </p>
+  </div>
+  <div class="search-box input-group input-group-sm p-2" *ngIf="search">
+    <input type="text" (input)="onInput($event)" class="form-control" placeholder="请输入关键字" />
+  </div>
+  <ul class="list mb-0 overflow-auto">
+    <li class="form-group form-check" *ngFor="let item of list; index as i;"(click)="itemClick(i)">
+      <ng-container *ngTemplateOutlet="parent.customTpl || defaultTpl;context: { $implicit: item.value, item: item}"></ng-container>
+      <ng-template #defaultTpl>{{item.value}}</ng-template>
+    </li>
+  </ul>
+</div>

@@ -20,6 +20,8 @@ import { PipeComponent } from './components/pipe/pipe.component';
 import { ExponentialStrengthPipe } from './pipe/exponential-strength.pipe';
 import { NumberGtZeroPipe } from './pipe/number-gt-zero.pipe';
 import { LifeCycleComponent } from './components/life-cycle/life-cycle.component';
+import { TransferComponent } from './components/transfer/transfer.component';
+import { TransferPanelComponent } from './components/transfer/transfer-panel/transfer-panel.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import { LifeCycleComponent } from './components/life-cycle/life-cycle.component
     PipeComponent,
     ExponentialStrengthPipe,
     NumberGtZeroPipe,
-    LifeCycleComponent
+    LifeCycleComponent,
+    TransferComponent,
+    TransferPanelComponent,
   ],
   imports: [
     BrowserModule,

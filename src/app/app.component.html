@@ -35,5 +35,10 @@
 </app-content-child> -->
 
 <!-- <app-pipe></app-pipe> -->
-<button class="btn btn-primary" (click)="show = !show">toggle life-cycle</button>
-<app-life-cycle title="This is a title" *ngIf="show"></app-life-cycle>
+<!-- <button class="btn btn-primary" (click)="show = !show">toggle life-cycle</button>
+<app-life-cycle title="This is a title" *ngIf="show"></app-life-cycle> -->
+<app-transfer [sourceData]="sourceData" [search]="true" [customTpl]="customTpl"></app-transfer>
+<ng-template #customTpl let-item="item">
+  <input type="checkbox" class="form-check-input" [id]="item.value" [checked]="item.checked" >
+  <label class="form-check-label" [for]="item.value">{{item.value}}</label>
+</ng-template>

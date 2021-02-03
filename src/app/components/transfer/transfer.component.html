@@ -1,0 +1,28 @@
+<div class="transfer">
+  <div class="panel-wrap">
+    <app-transfer-panel
+      [list]="leftShowData"
+      [search]="search"
+      (select)="onSelect($event, 'left')"
+      (filtered)="onFilte($event, 'left')"
+    ></app-transfer-panel>
+  </div>
+  <div class="operations">
+    <button class="btn btn-primary btn-small" (click)="to('left')" [disabled]="btnDisabled('left')">
+      <ng-container *ngTemplateOutlet="leftLabel || defaultLeftLabel"></ng-container>
+    </button>
+    <button class="btn btn-primary btn-small" (click)="to('right')" [disabled]="btnDisabled('right')">
+      <ng-container *ngTemplateOutlet="rightLabel || defaultRightLabel"></ng-container>
+    </button>
+  </div>
+  <div class="panel-wrap">
+    <app-transfer-panel
+      [list]="rightShowData"
+      [search]="search"
+      (select)="onSelect($event, 'right')"
+      (filtered)="onFilte($event, 'right')"
+    ></app-transfer-panel>
+  </div>
+</div>
+<ng-template #defaultLeftLabel>&gt;</ng-template>
+<ng-template #defaultRightLabel>&lt;</ng-template>
