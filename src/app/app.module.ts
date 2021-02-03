@@ -22,6 +22,8 @@ import { NumberGtZeroPipe } from './pipe/number-gt-zero.pipe';
 import { LifeCycleComponent } from './components/life-cycle/life-cycle.component';
 import { TransferComponent } from './components/transfer/transfer.component';
 import { TransferPanelComponent } from './components/transfer/transfer-panel/transfer-panel.component';
+import { AlertComponent } from './components/alert/alert.component';
+import { AlertBoxComponent } from './components/alert-box/alert-box.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +45,8 @@ import { TransferPanelComponent } from './components/transfer/transfer-panel/tra
     LifeCycleComponent,
     TransferComponent,
     TransferPanelComponent,
+    AlertComponent,
+    AlertBoxComponent,
   ],
   imports: [
     BrowserModule,
