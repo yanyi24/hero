@@ -1,11 +1,11 @@
-import { AfterViewInit, Component, ContentChild, ContentChildren, ElementRef, OnInit, QueryList } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ContentChild, ContentChildren, ElementRef, OnInit, QueryList } from '@angular/core';
 import { ContentChildPanelComponent } from './content-child-panel/content-child-panel.component';
 
 @Component({
   selector: 'app-content-child',
   templateUrl: './content-child.component.html',
-  styles: [
-  ]
+  styles: [],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ContentChildComponent implements OnInit, AfterViewInit {
   // 这样是获取不到元素的

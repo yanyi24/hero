@@ -1,5 +1,5 @@
 // 1、引入TemplateRef、ViewChild
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-ng-if',
@@ -10,8 +10,8 @@ import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
     <div>condition为假是显示</div>
   </ng-template>
   `,
-  styles: [
-  ]
+  styles: [],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NgIfComponent implements OnInit {
   condition = true;

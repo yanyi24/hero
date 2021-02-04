@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-ng-switch',
@@ -22,6 +22,7 @@ import { Component, OnInit } from '@angular/core';
       <p *ngSwitchDefault>啥都不是</p>
     </div>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NgSwitchComponent implements OnInit {
   fruit = '';

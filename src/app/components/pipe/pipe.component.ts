@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-pipe',
   templateUrl: './pipe.component.html',
-  styles: [
-  ]
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PipeComponent implements OnInit {
   obj:{[key: number]: string} = {2: 'foo', 1: 'bar', 4: 'a', 3: 'b'};

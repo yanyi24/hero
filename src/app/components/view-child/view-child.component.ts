@@ -1,10 +1,10 @@
-import { AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { PanelComponent } from './panel/panel.component';
 
 @Component({
   selector: 'app-view-child',
   templateUrl: './view-child.component.html',
-  styles: []
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ViewChildComponent implements OnInit, AfterViewInit {
   // 定义私有属性boxEl，是ElementRef类型。

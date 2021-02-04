@@ -1,9 +1,10 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-sizer',
   templateUrl: './sizer.component.html',
-  styleUrls: ['./sizer.component.scss']
+  styleUrls: ['./sizer.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SizerComponent implements OnInit {
   // 创建输入属性size，为number或字符串类型

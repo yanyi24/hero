@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 const Heros: Hero[] = [
   {id: 'hero_0', name: '盖伦'},
   {id: 'hero_1', name: '赵信'},
@@ -20,8 +20,8 @@ interface Hero {
       </li>
     </ul>
   `,
-  styles: [
-  ]
+  styles: [],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NgForComponent implements OnInit {
   heros: Hero[] = Heros;
