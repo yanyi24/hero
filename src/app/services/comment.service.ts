@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
-import Comments from '../data/comments';
-// @Injectable({
-//   providedIn: 'root'
-// })
+import { CommentT } from '../components/service/comment';
+@Injectable()
 export class CommentService {
-  constructor() { }
+  constructor(private comment: CommentT[]) { }
   getComments() {
-    return Comments;
+    return this.comment;
   }
 }
