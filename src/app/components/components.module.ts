@@ -18,6 +18,7 @@ import { ViewChildComponent } from './view-child/view-child.component';
 import { FormsModule } from '@angular/forms';
 import { PipeModule } from '../pipe/pipe.module';
 import { ServiceComponent } from './service/service.component';
+import { RxjsComponent } from './rxjs/rxjs.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { ServiceComponent } from './service/service.component';
     TransferPanelComponent,
     AlertComponent,
     AlertBoxComponent,
-    ServiceComponent
+    ServiceComponent,
+    RxjsComponent
   ],
   imports: [
     PipeModule,
@@ -60,7 +62,8 @@ import { ServiceComponent } from './service/service.component';
     TransferPanelComponent,
     AlertComponent,
     AlertBoxComponent,
-    ServiceComponent
+    ServiceComponent,
+    RxjsComponent
   ]
 })
 export class ComponentsModule { }
