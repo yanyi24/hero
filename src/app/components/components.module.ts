@@ -18,6 +18,8 @@ import { ViewChildComponent } from './view-child/view-child.component';
 import { FormsModule } from '@angular/forms';
 import { PipeModule } from '../pipe/pipe.module';
 import { ServiceComponent } from './service/service.component';
+import { LoggerComponent } from './logger/logger.component';
+import { LoggerContentComponent } from './logger/logger-content/logger-content.component';
 
 
 @NgModule({
@@ -37,7 +39,9 @@ import { ServiceComponent } from './service/service.component';
     TransferPanelComponent,
     AlertComponent,
     AlertBoxComponent,
-    ServiceComponent
+    ServiceComponent,
+    LoggerComponent,
+    LoggerContentComponent
   ],
   imports: [
     PipeModule,
@@ -60,7 +64,9 @@ import { ServiceComponent } from './service/service.component';
     TransferPanelComponent,
     AlertComponent,
     AlertBoxComponent,
-    ServiceComponent
+    ServiceComponent,
+    LoggerComponent,
+    LoggerContentComponent
   ]
 })
 export class ComponentsModule { }
