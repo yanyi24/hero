@@ -18,6 +18,8 @@ import { ViewChildComponent } from './view-child/view-child.component';
 import { FormsModule } from '@angular/forms';
 import { PipeModule } from '../pipe/pipe.module';
 import { ServiceComponent } from './service/service.component';
+import { LoggerComponent } from './logger/logger.component';
+import { LoggerContentComponent } from './logger/logger-content/logger-content.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 
 
@@ -39,6 +41,8 @@ import { RxjsComponent } from './rxjs/rxjs.component';
     AlertComponent,
     AlertBoxComponent,
     ServiceComponent,
+    LoggerComponent,
+    LoggerContentComponent,
     RxjsComponent
   ],
   imports: [
@@ -63,7 +67,7 @@ import { RxjsComponent } from './rxjs/rxjs.component';
     AlertComponent,
     AlertBoxComponent,
     ServiceComponent,
+    LoggerComponent,
+    LoggerContentComponent,
     RxjsComponent
-  ]
 })
-export class ComponentsModule { }
