@@ -29,7 +29,6 @@ import { of } from 'rxjs';
 const source$ = of({ name: 'Brian' }, [1, 2, 3], function hello() {
   return 'Hello';
 });
-
 const subscribe = source$.subscribe(val => console.log(val));
 ```
 
@@ -78,7 +77,6 @@ const subscribe = mapSource$.subscribe(val => console.log(val));
 import { from } from 'rxjs';
 // 将字符串作为字符序列发出,空格也同样输出
 const source$ = from('Hello World');
-
 // 输出: 'H','e','l','l','o',' ','W','o','r','l','d'
 source$.subscribe(val => console.log(val));
 ```
@@ -175,14 +173,199 @@ iff$.subscribe(res => console.log(res));
 
 ### concat
 
-类似数组的 ```concat``` ，将每个 ```Observable``` 拼接起来，按顺序发出值
+类似数组的 ```concat``` ，将每个 ```Observable``` 拼接起来，按顺序发出值，前一个流不执行完后面的流不执行。
+
+![operator5](./images/operator5.gif)
 
 ```typescript
 import {interval, range, concat} from 'rxjs';
 import {take} from 'rxjs/operators';
-//take(4) 只取流的前4个值
-const timer$ = interval(1000).pipe(take(4));
-const sequence$ = range(1, 10);
-const result = concat(timer$, sequence$);
+const interval$ = interval(1000).pipe(
+  delay(3000),
+  // take(4) 只取流的前4个值
+  take(4)
+);
+const sequence$ = range(1, 3);
+const result = concat(interval$, sequence$);
+// 延迟3秒后依次打印出0 1 2 3 1 2 3
+result.subscribe(x => console.log(x));
+```
+
+### concatAll
+
+高阶转低阶，按顺序订阅每一个 ```Observable``` 。
+
+tips：高阶的 ```Observable``` ，一个 ```Observable``` 中还嵌套着其它 ```Observable```
+
+```typescript
+import { fromEvent, interval } from 'rxjs';
+import { map, take, concatAll } from 'rxjs/operators';
+const clicks$ = fromEvent(document, 'click');
+const higherOrder$ = clicks$.pipe(
+  map(ev => interval(1000).pipe(take(2)))
+);
+// 下面输出由interval创建出来的observable
+higherOrder$.subscribe(res => console.log(res));
+// 合并
+const firstOrder$ = higherOrder$.pipe(concatAll());
+// 没点击一次页面，将每隔一秒输出0 1
+firstOrder$.subscribe(x => console.log(x));
+```
+
+### merge
+
+将多个 ```Observable``` 合并，与 ```concat``` 的行为不同， ```merge``` 是把值按发射的顺序，逐个进行融合。
+
+![operator4](./images/operator4.gif)
+
+```typescript
+import { merge, fromEvent, interval } from 'rxjs';
+
+const clicks$ = fromEvent(document, 'click');
+const interval$ = interval(1000);
+const merged$ = merge(clicks$, interval$);
+// 定时器一直从0开始持续输出，没点击一次输出fromEvent创建的流
+merged$.subscribe(res => console.log(res));
+```
+
+设置最多合并几个 ```Observable``` 。
+
+```typescript
+// mapTo('a') 将结果转化为'a'
+const interval1$ = interval(1000).pipe(take(10), mapTo('a'));
+const interval2$ = interval(2000).pipe(take(6), mapTo('b'));
+const interval3$ = interval(500).pipe(take(10), mapTo('c'));
+// 最后一个参数设为2，表示不管合并了多少个流，最多也只能merge其中的两个（与参数顺序无关）
+const merged$ = merge(interval1$, interval2$, interval3$, 2);
+merged$.subscribe(x => console.log(x));
+```
+
+### mergeAll
+
+```typescript
+import { fromEvent, interval } from 'rxjs';
+import { map, mergeAll } from 'rxjs/operators';
+
+const clicks$ = fromEvent(document, 'click');
+const higherOrder$ = clicks$.pipe(map((ev) => interval(1000)));
+const firstOrder$ = higherOrder$.pipe(mergeAll());
+// 每点一次，就会发送一个interval创建的流，点的次数越多，创建的流也就越多
+firstOrder$.subscribe(x => console.log(x));
+```
+
+### forkJoin
+
+类似 ```Promise.all``` , 等每个 ```Observables``` 都完成后，合并它们发出的最后一个值。
+
+```typescript
+import { forkJoin, of, timer } from 'rxjs';
+
+const observable = forkJoin([
+  of(1, 2, 3, 4),
+  Promise.resolve(8),
+  timer(4000),
+]);
+/**
+ * 输出：
+ * [4, 8, 0]
+ * 'This is how it ends!'
+ * **/
+observable.subscribe({
+ next: value => console.log(value),
+ complete: () => console.log('This is how it ends!'),
+});
+```
+
+### partition
+
+将一个 ```Observable``` 按条件分成两个。
+
+```typescript
+const observableValues = of(1, 2, 3, 4, 5, 6);
+const [evens$, odds$] = partition(observableValues, (value, index) => value % 2 === 0);
+odds$.subscribe(x => console.log('odds', x));
+evens$.subscribe(x => console.log('evens', x));
+```
+
+### race
+
+类似 ```Promise.race``` ，在多个 ```Observable``` 中，推送最快发出值的那一个。
+
+```typescript
+import { race, interval } from 'rxjs';
+import { mapTo } from 'rxjs/operators';
+
+const obs1$ = interval(1000).pipe(mapTo('fast one'));
+const obs2$ = interval(3000).pipe(mapTo('medium one'));
+const obs3$ = interval(5000).pipe(mapTo('slow one'));
+// 输出：'fast one'
+race(obs3$, obs1$, obs2$).subscribe(winner => console.log(winner));
+```
+
+### zip
+
+合并多个 ```Observable``` ，会严格按照发射值的位置(索引)，合并每个流发出的值
+也就是将每个 ```Observable``` 的第一个值合并，第二个值合并 ··· 第n个值合并
+
+```typescript
+import { zip, of } from 'rxjs';
+
+const age$ = of<number>(27, 25, 29);
+const name$ = of<string>('Foo', 'Bar', 'Beer');
+const isDev$ = of<boolean>(true, true, false);
+zip(age$, name$, isDev$).subscribe(x => console.log(x));
+```
+
+![operator6](./images/operator6.png)
+
+### combineAll
+
+高阶转低阶，等到 ```Observable``` 完成后，对收集到的 ```observables``` 使用 ```combineLatest```
+
+```typescript
+import { fromEvent, interval } from 'rxjs';
+import { map, combineAll, take } from 'rxjs/operators';
+
+const clicks$ = fromEvent(document, 'click');
+/*
+  每次点击，都会映射成interval发出的三个值
+  点击三次higherOrder才算完成
+  然后会把每次点击发出的值使用combineLatest策略合并每次点击的最新值
+*/
+const higherOrder$ = clicks$.pipe(
+  map(ev =>
+    interval(2000).pipe(take(3))
+  ),
+  take(3)
+);
+const result$ = higherOrder$.pipe(combineAll());
+result$.subscribe(x => console.log(x));
+```
+
+### startWith和endWith
+
+- ```startWith```: 在 ```Observable``` 发射值之前，先发射一个指定的值
+- ```endWith```: 在 ```Observable``` 完成后，再发射一个指定的值
+
+```typescript
+import { of } from 'rxjs';
+import { startWith, endWith } from 'rxjs/operators';
+of('source')
+  .pipe(startWith('开始接收数据'), endWith('接收数据完成'))
+  .subscribe(x => console.log(x));
+```
+
+### withLatestFrom
+
+类似 ```combinelatest``` ，不过它只保证第二个流的值是最新的。
+
+```typescript
+import { fromEvent, interval } from 'rxjs';
+import { withLatestFrom, pluck } from 'rxjs/operators';
+// pluck('clientX')获取点击x坐标位置
+const clicks = fromEvent(document, 'click').pipe(pluck('clientX'));
+const interval$ = interval(1000);
+// const result = clicks.pipe(withLatestFrom(interval$)); // 只保证interval的数据是最新
+const result = interval$.pipe(withLatestFrom(clicks)); // 只保证点击位置数据最新
 result.subscribe(x => console.log(x));
 ```

@@ -70,4 +70,6 @@ import { RxjsComponent } from './rxjs/rxjs.component';
     LoggerComponent,
     LoggerContentComponent,
     RxjsComponent
+  ]
 })
+export class ComponentsModule { }
