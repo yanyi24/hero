@@ -1,18 +1,35 @@
 import { Component, OnInit } from '@angular/core';
-import {combineLatest, concat, empty, forkJoin, from, fromEvent, iif, interval, merge, of, partition, race, range, timer, zip} from 'rxjs';
+import {
+  combineLatest,
+  concat,
+  empty,
+  forkJoin,
+  from,
+  fromEvent,
+  iif,
+  interval,
+  merge,
+  of,
+  partition,
+  race,
+  range,
+  Subject,
+  timer,
+  zip
+} from 'rxjs';
 import {
   buffer, bufferCount, bufferTime, bufferToggle, bufferWhen,
   combineAll,
-  concatAll, concatMap,
+  concatAll, concatMap, concatMapTo,
   delay,
-  endWith,
+  endWith, exhaust, groupBy,
   map,
   mapTo,
-  mergeAll, mergeMap, pluck,
+  mergeAll, mergeMap, mergeMapTo, mergeScan, pairwise, pluck, reduce,
   scan,
   startWith, switchMap, switchMapTo,
   take,
-  throttleTime,
+  throttleTime, toArray,
   withLatestFrom
 } from 'rxjs/operators';
 
@@ -29,40 +46,13 @@ export class RxjsComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    const interval$ = interval(500)
-      .pipe(
-        /*
-        * 在1秒时推送第一个流： [0]
-        * 此后，每等待3秒推送下一个：[5,6,7] [11,12,13]...
-        * */
-        bufferTime(1000, 3000)
-      )
-      // .subscribe(res => console.log(res));
-    const clicks$ = fromEvent(document, 'click')
-      .pipe(
-        switchMapTo(of('hello'))
-      )
-      // .subscribe(res => console.log(res));
-// 发出延迟值
-    const source = of(2000, 1000);
-// 将内部 observable 映射成 source，当前一个完成时发出结果并订阅下一个
-    const example = source.pipe(
-      concatMap(val => of(`Delayed by: ${val}ms`).pipe(delay(val)))
+    const clicks = fromEvent(document, 'click');
+    const higherOrder = clicks.pipe(
+      map((ev) => interval(1000).pipe(take(5))),
     );
-// 输出: With concatMap: Delayed by: 2000ms, With concatMap: Delayed by: 1000ms
-//     const subscribe = example.subscribe(val =>
-//       console.log(`With concatMap: ${val}`)
-//     );
-
-// 展示 concatMap 和 mergeMap 之间的区别
-    const mergeMapExample = source
-      .pipe(
-        // 只是为了确保 meregeMap 的日志晚于 concatMap 示例
-        // delay(5000),
-        mergeMap(val => of(`Delayed by: ${val}ms`).pipe(delay(val)))
-      )
-      .subscribe(val => console.log(`With mergeMap: ${val}`));
-
+    const result = higherOrder.pipe(exhaust());
+    // 不管点击多少次，都会先完成上一次未完成的interval的流
+    result.subscribe(x => console.log(x));
   }
   concatArr(): void {
     const arr1$ = from(['a', 'b', 'c']);
