@@ -13,29 +13,30 @@ import {
   partition,
   race,
   range,
-  Subject,
+  Subject, throwError,
   timer,
   zip
 } from 'rxjs';
 import {
   audit,
-  buffer, bufferCount, bufferTime, bufferToggle, bufferWhen,
+  buffer, bufferCount, bufferTime, bufferToggle, bufferWhen, catchError,
   combineAll,
-  concatAll, concatMap, concatMapTo, debounce,
+  concatAll, concatMap, concatMapTo, count, debounce,
   delay, distinct, distinctUntilChanged, distinctUntilKeyChanged, elementAt,
   endWith, exhaust, filter, first, groupBy, ignoreElements, last,
   map,
-  mapTo,
-  mergeAll, mergeMap, mergeMapTo, mergeScan, pairwise, pluck, reduce, sample,
+  mapTo, max,
+  mergeAll, mergeMap, mergeMapTo, mergeScan, min, pairwise, pluck, reduce, retry, retryWhen, sample,
   scan, single, skip, skipLast, skipUntil, skipWhile,
   startWith, switchMap, switchMapTo,
-  take, takeLast, takeUntil, takeWhile, throttle,
-  throttleTime, toArray,
+  take, takeLast, takeUntil, takeWhile, tap, throttle,
+  throttleTime, timeInterval, timeout, timeoutWith, timestamp, toArray,
   withLatestFrom
 } from 'rxjs/operators';
+import {error} from '@angular/compiler/src/util';
 interface Person {
-  age: number,
-  name: string
+  age: number;
+  name: string;
 }
 @Component({
   selector: 'app-rxjs',
@@ -51,10 +52,17 @@ export class RxjsComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    of<Person>(
+      {age: 5, name: 'Jack'},
+      { age: 8, name: 'Rose'},
+      { age: 12, name: 'Bob'}
+    ).pipe(
+      min<Person>((a: Person, b: Person) => a.age > b.age ? 1 : -1)
+    ).subscribe(
+      (res: Person) => console.log(res.name)
+    );
 
-    const interval$ = interval(500);
-    const result = interval$.pipe(throttle(ev => interval(2000)));
-    result.subscribe(x => console.log(x));
+
   }
 
 
