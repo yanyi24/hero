@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {
+  AsyncSubject,
+  BehaviorSubject,
   combineLatest,
-  concat,
+  concat, ConnectableObservable,
   empty,
   forkJoin,
   from,
@@ -12,25 +14,76 @@ import {
   of,
   partition,
   race,
-  range,
+  range, ReplaySubject,
   Subject, throwError,
   timer,
   zip
 } from 'rxjs';
 import {
   audit,
-  buffer, bufferCount, bufferTime, bufferToggle, bufferWhen, catchError,
+  buffer,
+  bufferCount,
+  bufferTime,
+  bufferToggle,
+  bufferWhen,
+  catchError,
   combineAll,
-  concatAll, concatMap, concatMapTo, count, debounce,
-  delay, distinct, distinctUntilChanged, distinctUntilKeyChanged, elementAt,
-  endWith, exhaust, filter, first, groupBy, ignoreElements, last,
+  concatAll,
+  concatMap,
+  concatMapTo,
+  count,
+  debounce,
+  delay,
+  distinct,
+  distinctUntilChanged,
+  distinctUntilKeyChanged,
+  elementAt,
+  endWith,
+  exhaust,
+  filter,
+  first,
+  groupBy,
+  ignoreElements,
+  last,
   map,
-  mapTo, max,
-  mergeAll, mergeMap, mergeMapTo, mergeScan, min, pairwise, pluck, reduce, retry, retryWhen, sample,
-  scan, single, skip, skipLast, skipUntil, skipWhile,
-  startWith, switchMap, switchMapTo,
-  take, takeLast, takeUntil, takeWhile, tap, throttle,
-  throttleTime, timeInterval, timeout, timeoutWith, timestamp, toArray,
+  mapTo,
+  max,
+  mergeAll,
+  mergeMap,
+  mergeMapTo,
+  mergeScan,
+  min,
+  multicast,
+  pairwise,
+  pluck,
+  publish,
+  publishBehavior,
+  reduce,
+  refCount,
+  retry,
+  retryWhen,
+  sample,
+  scan, share, shareReplay,
+  single,
+  skip,
+  skipLast,
+  skipUntil,
+  skipWhile,
+  startWith,
+  switchMap,
+  switchMapTo,
+  take,
+  takeLast,
+  takeUntil,
+  takeWhile,
+  tap,
+  throttle,
+  throttleTime,
+  timeInterval,
+  timeout,
+  timeoutWith,
+  timestamp,
+  toArray,
   withLatestFrom
 } from 'rxjs/operators';
 import {error} from '@angular/compiler/src/util';
@@ -52,17 +105,15 @@ export class RxjsComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    of<Person>(
-      {age: 5, name: 'Jack'},
-      { age: 8, name: 'Rose'},
-      { age: 12, name: 'Bob'}
-    ).pipe(
-      min<Person>((a: Person, b: Person) => a.age > b.age ? 1 : -1)
-    ).subscribe(
-      (res: Person) => console.log(res.name)
+    const shared = range(0, 4).pipe(
+      shareReplay(2)
     );
 
+    shared.subscribe(res => console.log('A: ' + res));
 
+    setTimeout(() => {
+      shared.subscribe(res => console.log('B: ' + res));
+    }, 2000);
   }
 
 
