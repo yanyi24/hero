@@ -67,7 +67,7 @@ class BaiduService {
 
 ### 获取input输入值
 
-获取 DOM ：
+获取 ```DOM``` ：
 
 ```typescript
 @ViewChild('input', {static: true}) private inputEl: ElementRef;
@@ -99,7 +99,7 @@ fromEvent(this.inputEl.nativeElement, 'input').pipe(
 });
 ```
 
-通常情况下，这样的操作是可以实现功能的，但是会发现，每次请求， ```resList``` 并没有更新。
+通常情况下，这样的操作是可以实现功能的，但是会发现，每次请求， ```resList``` 能够获取到，但是页面并更新。
 
 因为：在 ```OnPush``` 策略下，虽然 ```input``` 事件会触发变更检测，但是后面的请求是异步操作。当输入时，请求并没有返回结果，也就不会有变化。所以，我们需要手动触发变更检测。
 
