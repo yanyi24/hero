@@ -20,7 +20,7 @@ import { PipeModule } from '../pipe/pipe.module';
 import { ServiceComponent } from './service/service.component';
 import { LoggerComponent } from './logger/logger.component';
 import { LoggerContentComponent } from './logger/logger-content/logger-content.component';
-import { RxjsComponent } from './rxjs/rxjs.component';
+import { RxjsDemoComponent } from './rxjs-demo/rxjs-demo.component';
 
 
 @NgModule({
@@ -43,7 +43,7 @@ import { RxjsComponent } from './rxjs/rxjs.component';
     ServiceComponent,
     LoggerComponent,
     LoggerContentComponent,
-    RxjsComponent
+    RxjsDemoComponent
   ],
   imports: [
     PipeModule,
@@ -69,7 +69,7 @@ import { RxjsComponent } from './rxjs/rxjs.component';
     ServiceComponent,
     LoggerComponent,
     LoggerContentComponent,
-    RxjsComponent
+    RxjsDemoComponent
   ]
 })
 export class ComponentsModule { }

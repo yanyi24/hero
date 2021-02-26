@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { TransferItem } from './components/transfer/types';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {TransferItem} from './components/transfer/types';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent implements OnInit{
   sourceData: TransferItem[] = [];
@@ -22,7 +23,7 @@ export class AppComponent implements OnInit{
         value: `${prefix}${i + 1}`,
         checked: false
       })
-      
+
     }
   }
 }
