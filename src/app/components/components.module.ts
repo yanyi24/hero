@@ -21,6 +21,7 @@ import { ServiceComponent } from './service/service.component';
 import { LoggerComponent } from './logger/logger.component';
 import { LoggerContentComponent } from './logger/logger-content/logger-content.component';
 import { RxjsDemoComponent } from './rxjs-demo/rxjs-demo.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { RxjsDemoComponent } from './rxjs-demo/rxjs-demo.component';
     ServiceComponent,
     LoggerComponent,
     LoggerContentComponent,
-    RxjsDemoComponent
+    RxjsDemoComponent,
+    NotFoundComponent
   ],
   imports: [
     PipeModule,

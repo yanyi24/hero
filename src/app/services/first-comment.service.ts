@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import comments from '../data/comments';
+import {COMMENTS} from '../data/data';
 
 @Injectable()
 export class FirstCommentService {
   constructor() { }
   getComments() {
-    return comments[0];
+    return COMMENTS[0];
   }
 }

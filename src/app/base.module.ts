@@ -4,6 +4,8 @@ import { ComponentsModule } from './components/components.module';
 import { DirectivesModule } from './directives/directives.module';
 import { PipeModule } from './pipe/pipe.module';
 import { CommentService } from './services/comment.service';
+import {DemosModule} from './demos/demos.module';
+import {RouterStudyModule} from './components/router-study/router-study.module';
 
 
 
@@ -13,12 +15,16 @@ import { CommentService } from './services/comment.service';
     PipeModule,
     CommonModule,
     DirectivesModule,
-    ComponentsModule
+    ComponentsModule,
+    DemosModule,
+    RouterStudyModule
   ],
   exports: [
     ComponentsModule,
     PipeModule,
-    DirectivesModule
+    DirectivesModule,
+    DemosModule,
+    RouterStudyModule
   ],
   providers: [CommentService]
 })
