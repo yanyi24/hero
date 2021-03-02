@@ -5,7 +5,7 @@ import {concatAll, map, takeUntil, withLatestFrom} from 'rxjs/operators';
 @Component({
   selector: 'app-drag',
   template: `
-      <p class="drag" id="drag" #drag>
+      <p class="drag" #drag>
         drag me
       </p>
   `,
@@ -36,12 +36,11 @@ export class DragComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    const mouseDown = fromEvent(document.body, 'mousedown');
+    const mouseDown = fromEvent(this.dragEl.nativeElement, 'mousedown');
     const mouseUp = fromEvent(document.body, 'mouseup');
     const mouseMove = fromEvent(this.dragEl.nativeElement, 'mousemove');
-    mouseUp.subscribe(() => console.log('up'));
     mouseDown.pipe(
-      map(e => mouseMove.pipe(takeUntil(mouseUp))),
+      map(() => mouseMove.pipe(takeUntil(mouseUp))),
       concatAll(),
       withLatestFrom(mouseDown, (move: MouseEvent, down: MouseEvent) => {
         const {width, height} = (down.target as HTMLElement).getBoundingClientRect();
