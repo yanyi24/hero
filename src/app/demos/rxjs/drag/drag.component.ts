@@ -19,10 +19,10 @@ import {concatAll, map, takeUntil, withLatestFrom} from 'rxjs/operators';
       line-height: 100px;
       cursor: pointer;
       position: absolute;
-      -moz-user-select:none;/*火狐*/
-      -webkit-user-select:none;/*webkit浏览器*/
-      -ms-user-select:none;/*IE10*/
-      -khtml-user-select:none;/*早期浏览器*/
+      -moz-user-select:none;
+      -webkit-user-select:none;
+      -ms-user-select:none;
+      -khtml-user-select:none;
       user-select:none;
     }`
   ],
@@ -38,7 +38,7 @@ export class DragComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     const mouseDown = fromEvent(this.dragEl.nativeElement, 'mousedown');
     const mouseUp = fromEvent(document.body, 'mouseup');
-    const mouseMove = fromEvent(this.dragEl.nativeElement, 'mousemove');
+    const mouseMove = fromEvent(document.body, 'mousemove');
     mouseDown.pipe(
       map(() => mouseMove.pipe(takeUntil(mouseUp))),
       concatAll(),
@@ -58,5 +58,4 @@ export class DragComponent implements OnInit, AfterViewInit {
   getValue(value, max, min): number {
     return Math.min(Math.max(value, min), max);
   }
-
 }
