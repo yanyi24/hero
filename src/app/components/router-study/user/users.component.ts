@@ -1,17 +1,11 @@
 import {Component, OnInit, ChangeDetectionStrategy, Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
-import { USERS } from '../../../data/data';
 import { User } from '../../../data/data.type';
-// 注册获取数据的服务
-@Injectable()
-class UserService {
-  getUsers(): Observable<User[]> {
-    return of(USERS);
-  }
-}
+import {UserService} from './user.service';
+
 
 @Component({
-  selector: 'app-user',
+  selector: 'app-users',
   template: `
     <h3>User page</h3>
     <ul class="list-group">
@@ -29,9 +23,8 @@ class UserService {
     .list-group-item{cursor: pointer;}
   `],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [UserService]
 })
-export class UserComponent implements OnInit {
+export class UsersComponent implements OnInit {
   users$: Observable<User[]>;
   selectedId: number;
   constructor(private userServer: UserService) { }

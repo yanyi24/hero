@@ -131,8 +131,8 @@ template: `
 // router-study-routing.module.ts 自动生成内容：
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {UserComponent} from './user/user.component';
-import {CommentComponent} from './comment/comment.component';
+import {UsersComponent} from './user/user.component';
+import {CommentsComponent} from './comment/comment.component';
 
 const routes: Routes = [];
 
@@ -147,8 +147,8 @@ export class RouterStudyRoutingModule { }
 
 ```typescript
 const routes: Routes = [
-  {path: 'comment', component: CommentComponent},
-  {path: 'user', component: UserComponent},
+  {path: 'comment', component: CommentsComponent},
+  {path: 'user', component: UsersComponent},
 ];
 ```
 
@@ -224,7 +224,7 @@ const routes: Routes = [
 为了后面的演示，我们给两个组件添加一些数据。（基本操作，没什么技术含量）
 
 ```typescript
-// comment.component.ts
+// comments.component.ts
 import {Component, OnInit, ChangeDetectionStrategy, Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
 import {COMMENTS} from '../../../data/data';
@@ -264,7 +264,7 @@ class CommentService {
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [CommentService]
 })
-export class CommentComponent implements OnInit {
+export class CommentsComponent implements OnInit {
   comments$: Observable<Comment[]>;
   selectedId: number;
   constructor(private commentServer: CommentService) { }
