@@ -1,52 +1,46 @@
-import {Component, OnInit, ChangeDetectionStrategy, Injectable} from '@angular/core';
-import {Observable, of} from 'rxjs';
-import {COMMENTS} from '../../../data/data';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Observable} from 'rxjs';
 import {Comment} from '../../../data/data.type';
-import {map} from 'rxjs/operators';
-// 注册获取数据的服务
-@Injectable()
-class CommentService {
-  getComments(): Observable<Comment[]> {
-    return of(COMMENTS);
-  }
-  // 根据Id匹配数据
-  getComment(id: number | string): Observable<Comment> {
-    return this.getComments().pipe(
-      map((comments: Comment[]) => comments.find(comment => comment.id === +id))
-    );
-  }
-}
+import {switchMap} from 'rxjs/operators';
+import {CommentService} from './comment.service';
+
 @Component({
   selector: 'app-comment',
   template: `
-    <h3>Comment page</h3>
-    <ul class="list-group">
-      <li
-        class="list-group-item"
-        [class.active]="item.id === selectedId"
-        *ngFor="let item of comments$ | async"
-        (click)="onSelected(item.id)">
-        {{ item.name }}
-      </li>
-    </ul>
+    <div class="card" style="width: 18rem;">
+      <div class="card-body" *ngIf="comment$ | async as comment; else noneComment">
+        <h5 class="card-title">{{comment.name}}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">{{comment.email}}</h6>
+        <p class="card-text">{{comment.body}}</p>
+        <hr>
+        <button class="btn btn-primary" (click)="goBack(comment.id)">返回</button>
+<!--        <button class="btn btn-primary" routerLink="/comments" [queryParams]="{id: comment.id}">返回</button>-->
+      </div>
+    </div>
+    <ng-template #noneComment>没有comment内容</ng-template>
   `,
-  styles: [`
-    .list-group{width: 340px;}
-    .list-group-item{cursor: pointer;}
-  `],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [CommentService]
+  styles: [],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CommentComponent implements OnInit {
-  comments$: Observable<Comment[]>;
-  selectedId: number;
-  constructor(private commentServer: CommentService) { }
+  comment$: Observable<Comment>;
+  constructor(private route: ActivatedRoute, private commentServer: CommentService, private router: Router) { }
 
   ngOnInit(): void {
-    // 直接获取Observable
-    this.comments$ = this.commentServer.getComments();
+    // 使用params获取id
+    // this.comment$ = this.route.params.pipe(
+    //   switchMap( params => this.commentServer.getComment(params.id))
+    // );
+
+    // 使用paramMap获取id
+    this.comment$ = this.route.paramMap.pipe(
+      switchMap(paramMap => this.commentServer.getComment(paramMap.get('id')))
+    );
+    console.log(this.route.snapshot)
   }
-  onSelected(id: number): void {
-    this.selectedId = id;
+  goBack(id: number) {
+    // this.router.navigateByUrl('/comments?id=' + id)
+    this.router.navigate(['comments'], {queryParams: {id}})
   }
 }
