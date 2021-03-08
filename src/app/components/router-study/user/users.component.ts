@@ -2,6 +2,7 @@ import {Component, OnInit, ChangeDetectionStrategy, Injectable} from '@angular/c
 import {Observable, of} from 'rxjs';
 import { User } from '../../../data/data.type';
 import {UserService} from './user.service';
+import {ActivatedRoute} from '@angular/router';
 
 
 @Component({
@@ -13,10 +14,13 @@ import {UserService} from './user.service';
         class="list-group-item"
         [class.active]="item.id === selectedId"
         *ngFor="let item of users$ | async"
-        (click)="onSelected(item.id)">
+        (click)="onSelected(item.id)"
+        [routerLink]="[item.id]">
         {{ item.name }}
       </li>
     </ul>
+    <hr>
+    <router-outlet></router-outlet>
   `,
   styles: [`
     .list-group{width: 240px;}
@@ -27,11 +31,12 @@ import {UserService} from './user.service';
 export class UsersComponent implements OnInit {
   users$: Observable<User[]>;
   selectedId: number;
-  constructor(private userServer: UserService) { }
+  constructor(private userServer: UserService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     // 直接获取Observable
     this.users$ = this.userServer.getUsers();
+    // this.users$ = this.route.snapshot.params.
   }
   onSelected(id: number): void {
     this.selectedId = id;

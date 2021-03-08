@@ -8,10 +8,12 @@ import {CommonModule} from '@angular/common';
 import {CommentService} from './comment/comment.service';
 import {UserService} from './user/user.service';
 import { CommentComponent } from './comment/comment.component';
+import { UserComponent } from './user/user.component';
+import { TipsComponent } from './user/tips.component';
 
 
 @NgModule({
-  declarations: [CommentsComponent, UsersComponent, RouterStudyComponent, CommentComponent],
+  declarations: [CommentsComponent, UsersComponent, RouterStudyComponent, CommentComponent, UserComponent, TipsComponent],
   imports: [
     RouterStudyRoutingModule,
     CommonModule
