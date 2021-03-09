@@ -45,6 +45,7 @@ const routes: Routes = [
         [class.active]="item.id === selectedId"
         *ngFor="let item of users$ | async"
         (click)="onSelected(item.id)"
+        <!--   这里使用相对导航形式     -->
         [routerLink]="[item.id]">
         {{ item.name }}
       </li>
@@ -120,8 +121,84 @@ const routes: Routes = [
 生成一个 tips 组件作为演示：
 
 ```shell
-ng g c components/router-study/user/tips -t -s -c OnPush --flat
+ng g c components/router-study/tips -t -s -c OnPush --flat
 ```
+
+1. 设置跳转入口、预留命名出口（outlet）:
+
+```typescript
+// router-study.component.ts
+  template: `
+    <div class="container">
+      ...
+       <ul class="nav nav-pills">
+        ...
+        <li class="nav-item">
+          <!--  意思是将tips组件插入到名叫tip出口    -->
+          <a class="nav-link"  [routerLink]="[{outlets: {tip: ['tips']}}]" routerLinkActive="active">to tips</a>
+        </li>
+      </ul>
+      <router-outlet></router-outlet>
+      <!--  取名为tip    -->
+      <router-outlet name="tip"></router-outlet>
+    </div>
+  `,
+```
+
+2. 配置命名路由：
+
+```typescript
+// router-study-routing.module.ts
+const routes: Routes = [
+  {path: 'comments', component: CommentsComponent},
+  {path: 'comment/:id', component: CommentComponent},
+  {
+    path: 'tips',
+    component: TipsComponent,
+    outlet: 'tip' // 这里就是出口的名字
+  }
+];
+```
+
+3. 修改组件模板内容：
+
+```typescript
+// tips.component.ts
+@Component({
+  selector: 'app-tips',
+  template: `
+    <div class="tips">
+      <p>tips content!!!!</p>
+      <div class="btn-group">
+        <button class="btn btn-small btn-primary" (click)="onOk()">OK</button>
+      </div>
+    </div>
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class TipsComponent implements OnInit {
+  constructor(private router: Router) { }
+  ngOnInit(): void {}
+  // 这里的关闭是直接从DOM中移除
+  onOk(): void {
+    this.router.navigate([{ outlets: { tip: null }}]);
+  }
+}
+```
+
+![router3-2.gif](./images/router3-2.gif)
+
+从最后的结果可以看出：
+
+- URL （http://localhost:4200/users/4(tip:tips)） 中包含一个主路由 users 及第二个路由 (tip:tips)，出口名 tip 和路径 tips ；
+
+- 第二个路由会一直存在与DOM结构中，直到关闭。
+
+## 总结
+
+
+
+
 
 
 

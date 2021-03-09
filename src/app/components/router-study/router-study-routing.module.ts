@@ -4,7 +4,7 @@ import {UsersComponent} from './user/users.component';
 import {CommentsComponent} from './comment/comments.component';
 import {CommentComponent} from './comment/comment.component';
 import {UserComponent} from './user/user.component';
-import {TipsComponent} from './user/tips.component';
+import {TipsComponent} from './tips.component';
 
 const routes: Routes = [
   {path: 'comments', component: CommentsComponent},

@@ -9,7 +9,7 @@ import {CommentService} from './comment/comment.service';
 import {UserService} from './user/user.service';
 import { CommentComponent } from './comment/comment.component';
 import { UserComponent } from './user/user.component';
-import { TipsComponent } from './user/tips.component';
+import { TipsComponent } from './tips.component';
 
 
 @NgModule({

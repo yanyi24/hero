@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-router-study',
@@ -13,7 +14,8 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
           <a class="nav-link" routerLink="/comments" routerLinkActive="active">Comments</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link"  [routerLink]="[{outlets: {tip: ['tips']}}]" routerLinkActive="active">to tips</a>
+          <a class="nav-link"  (click)="goTips()">to tips</a>
+<!--          <a class="nav-link"  [routerLink]="[{outlets: {tip: ['tips']}}]" routerLinkActive="active">to tips</a>-->
         </li>
       </ul>
       <router-outlet></router-outlet>
@@ -25,9 +27,11 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 })
 export class RouterStudyComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
-
+  goTips(): void {
+    this.router.navigate([{outlets: {tip: ['tips']}}]);
+  }
 }
