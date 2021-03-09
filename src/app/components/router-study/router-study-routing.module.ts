@@ -4,7 +4,9 @@ import {UsersComponent} from './user/users.component';
 import {CommentsComponent} from './comment/comments.component';
 import {CommentComponent} from './comment/comment.component';
 import {UserComponent} from './user/user.component';
-import {TipsComponent} from './user/tips.component';
+import {TipsComponent} from './tips.component';
+import {CanDeactivateGuard} from './user/can-deactivate.guard';
+import {UserResolveService} from './user/user-resolve.service';
 
 const routes: Routes = [
   {path: 'comments', component: CommentsComponent},
@@ -23,7 +25,11 @@ const routes: Routes = [
         children: [
           {
             path: ':id',
-            component: UserComponent
+            component: UserComponent,
+            canDeactivate: [CanDeactivateGuard],
+            resolve: {
+              user: UserResolveService
+            }
           },
 
         ]

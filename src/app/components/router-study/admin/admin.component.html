@@ -1,0 +1,13 @@
+<h2>ADMIN</h2>
+<nav>
+  <ul class="nav nav-pills">
+    <li class="nav-item">
+      <a class="nav-link" routerLink="./" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Dashboard</a>
+<!--      <a class="nav-link" routerLink="./" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Dashboard</a>-->
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="./user" routerLinkActive="active">Manage user</a>
+    </li>
+  </ul>
+</nav>
+<router-outlet></router-outlet>
