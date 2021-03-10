@@ -196,7 +196,7 @@ export class TipsComponent implements OnInit {
 
 从最后的结果可以看出：
 
-- ```URL``` （```http://localhost:4200/users/4(tip:tips) ```） 中包含一个主路由 ```users``` 及第二个路由 (```tip:tips```)，出口名 ```tip``` 和路径 ```tips``` ；
+- ```URL``` （```http://localhost:4200/users/4(tip:tips)```） 中包含一个主路由 ```users``` 及第二个路由 (```tip:tips```)，出口名 ```tip``` 和路径 ```tips``` ；
 
 - 第二个路由会一直存在与```DOM```结构中，直到关闭；
 
