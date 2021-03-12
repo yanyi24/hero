@@ -1,5 +1,7 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {TransferItem} from './components/transfer/types';
+import {NavigationStart, Router} from '@angular/router';
+import {filter} from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +13,11 @@ export class AppComponent implements OnInit{
   sourceData: TransferItem[] = [];
   showUnless = false;
   show = true;
-
+  constructor(private router: Router) {
+    this.router.events
+      .pipe(filter(events => events instanceof NavigationStart))
+      .subscribe((event: NavigationStart) => console.log(event));
+  }
   ngOnInit(): void {
     this.setTransferData();
   }

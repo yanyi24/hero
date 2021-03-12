@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import {SelectivePreloadingStrategyService} from '../../../../services/selective-preloading-strategy.service';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -8,10 +9,11 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AdminDashboardComponent implements OnInit {
-
-  constructor() { }
+  modules: string[];
+  constructor(private preloadStrategy: SelectivePreloadingStrategyService) { }
 
   ngOnInit(): void {
+    console.log(this.preloadStrategy.preloadedModules); // ["admin", "users"]
   }
 
 }
